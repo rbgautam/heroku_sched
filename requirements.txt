@@ -1,7 +1,6 @@
 lxml
 requests
 twilio
-re
 time
 sys
 threading

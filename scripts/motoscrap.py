@@ -1,7 +1,6 @@
 from lxml import html
 import requests
 from twilio.rest import Client
-import re
 from time import sleep
 import time
 import sys
