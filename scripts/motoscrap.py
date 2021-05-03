@@ -2,7 +2,6 @@ from lxml import html
 import requests
 from twilio.rest import Client
 from time import sleep
-import time
 import sys
 from threading import Timer
 from datetime import datetime
