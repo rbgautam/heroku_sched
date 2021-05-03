@@ -23,9 +23,9 @@ def read_html():
         print('text match at '+ current_time)
     else:
         send_sms()
-		rt.stop()
+        rt.stop()
         sys.exit("Course open") 
-		quit()
+	quit()
 
 
 def send_sms():
