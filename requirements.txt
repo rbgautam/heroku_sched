@@ -1,6 +1,5 @@
 lxml
 requests
 twilio
-sys
 threading
 datetime
