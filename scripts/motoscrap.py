@@ -24,8 +24,9 @@ def read_html():
     else:
         send_sms()
         rt.stop()
-        sys.exit("Course open")
         quit()
+        sys.exit("Course open")
+        
 
 
 def send_sms():
@@ -49,7 +50,7 @@ def send_sms():
 
 def request_validation_in_intervals():
     global rt
-    rt = RepeatedTimer(10, read_html) # it auto-starts, no need of rt.start()
+    rt = RepeatedTimer(300, read_html) # it auto-starts, no need of rt.start()
     
     try:
         sleep(10000) # your long-running job goes here...
