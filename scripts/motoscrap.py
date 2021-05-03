@@ -24,8 +24,8 @@ def read_html():
     else:
         send_sms()
         rt.stop()
-        sys.exit("Course open") 
-	quit()
+        sys.exit("Course open")
+        quit()
 
 
 def send_sms():
