@@ -1,0 +1,9 @@
+lxml
+requests
+smtplib
+twilio
+re
+time
+sys
+threading
+datetime
