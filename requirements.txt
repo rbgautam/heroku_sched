@@ -1,6 +1,5 @@
 lxml
 requests
-smtplib
 twilio
 re
 time

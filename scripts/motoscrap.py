@@ -1,9 +1,7 @@
 from lxml import html
 import requests
-import smtplib
 from twilio.rest import Client
 import re
-# import interval_timer
 from time import sleep
 import time
 import sys
@@ -28,18 +26,7 @@ def read_html():
     else:
         send_sms()
 
-def send_mail():
-    try:
-        to_addrs = ['rahulbgautam@gmail.com','hellotofarah@gmail.com']
-        server = smtplib.SMTP('hub.iaai.com',25)
-        server.ehlo()
-        # server.starttls()
 
-        server.login('no-reply@iaai.com', 'Insurance2!')
-        msg = 'Course open again'
-        server.sendmail('rgautam@iaai.com', to_addrs, msg)
-    except Exception as ex:
-        print(ex)
 def send_sms():
     try:
         account_sid = 'AC810644ffe834065bc01effa922457941' #os.environ['TWILIO_ACCOUNT_SID']
