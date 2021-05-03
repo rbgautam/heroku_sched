@@ -31,8 +31,8 @@ def read_html():
 
 def send_sms():
     try:
-        account_sid = 'AC810644ffe834065bc01effa922457941' #os.environ['TWILIO_ACCOUNT_SID']
-        auth_token = '4ff2e4899e889007c5932da3ba193eb3'#os.environ['TWILIO_AUTH_TOKEN']
+        account_sid = os.environ['TWILIO_ACCOUNT_SID']
+        auth_token = os.environ['TWILIO_AUTH_TOKEN']
         client = Client(account_sid, auth_token)
 
         message = client.messages.create(
@@ -50,7 +50,7 @@ def send_sms():
 
 def request_validation_in_intervals():
     global rt
-    rt = RepeatedTimer(300, read_html) # it auto-starts, no need of rt.start()
+    rt = RepeatedTimer(30, send_sms) # it auto-starts, no need of rt.start()
     
     try:
         sleep(10000) # your long-running job goes here...
