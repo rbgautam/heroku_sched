@@ -37,11 +37,11 @@ def send_sms():
 
         message = client.messages.create(
          body='Course open again \n https://ce.harpercollege.edu/public/category/programArea.do?method=load&selectedProgramAreaId=29362',
-         from_='+13027867257',
+         from_='+14352363885',
          to='+16412260994')
         message = client.messages.create(
          body='Course open again \n https://ce.harpercollege.edu/public/category/programArea.do?method=load&selectedProgramAreaId=29362',
-         from_='+13027867257',
+         from_='+14352363885',
          to='+13125327290')
         print(message.sid)
     except Exception as ex:
