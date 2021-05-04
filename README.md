@@ -3,9 +3,9 @@
 
 #### For detailed explanation checkout : https://youtu.be/SH_KOHyU6Dg
 
-### The job scheduled in here is to populate a remote mongodb collection after every 10 seconds with a dummy data.
+### USE Case: The job scheduled in here is to populate scrap a webpage every 5 minutes for data and send notification through Twilio Api if the data is different.
 
-####Refrence: https://github.com/Amal4m41/schedule-python-script-in-heroku
+#### Refrence: https://github.com/Amal4m41/schedule-python-script-in-heroku
 Thanks for the nice tutorial
 
 Steps to push local git repo to heroku remote and start the application:
@@ -25,13 +25,13 @@ the empty Heroku Git repository is automatically set as a remote for your local 
 
 
 #To start the worker process :
-5.heroku ps:scale worker=1
+5.heroku ps:scale worker=1 --app <app_name>
 
 #To view the logs
-6.heroku logs --tail
+6.heroku logs --tail --app <app_name>
 
 #Later when we need to kill the worker process : 
-7.heroku scale worker=0
+7.heroku scale worker=0 --app <app_name>
 
 
 ```
