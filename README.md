@@ -3,7 +3,7 @@
 
 #### For detailed explanation checkout : https://youtu.be/SH_KOHyU6Dg
 
-### USE Case: The job scheduled in here is to populate scrap a webpage every 5 minutes for data and send notification through Twilio Api if the data is different.
+### USE Case: The job scheduled in here is to scrap a webpage every 5 minutes for data and send notification through Twilio Api if the data is different.
 
 #### Refrence: https://github.com/Amal4m41/schedule-python-script-in-heroku
 Thanks for the nice tutorial
