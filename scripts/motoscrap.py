@@ -38,11 +38,11 @@ def send_sms():
         message = client.messages.create(
          body='Course open again \n https://ce.harpercollege.edu/public/category/programArea.do?method=load&selectedProgramAreaId=29362',
          from_=os.environ['TWILIO_FROM_NUMBER'],
-         to='+16412260994')
+         to=os.environ['TWILIO_TO_NUMBER1'])
         message = client.messages.create(
          body='Course open again \n https://ce.harpercollege.edu/public/category/programArea.do?method=load&selectedProgramAreaId=29362',
          from_=os.environ['TWILIO_FROM_NUMBER'],
-         to='+13125327290')
+         to=os.environ['TWILIO_TO_NUMBER2'])
         print(message.sid)
     except Exception as ex:
         print(ex)
@@ -50,7 +50,7 @@ def send_sms():
 
 def request_validation_in_intervals():
     global rt
-    rt = RepeatedTimer(300, read_html) # it auto-starts, no need of rt.start()
+    rt = RepeatedTimer(300, send_sms) # it auto-starts, no need of rt.start()
     
     try:
         sleep(10000) # your long-running job goes here...
