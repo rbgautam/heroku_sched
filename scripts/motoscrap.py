@@ -16,7 +16,7 @@ def read_html():
     # print(data_strong_html[0])
     data_text_html = tree.xpath('//*[@id="programAreaDescription"]/h3[1]/b/text()')
     # print(data_text_html[0])
-    if data_strong_html[0] == '05/10/2021':
+    if data_strong_html[0] == '05/12/2021':
         
         now = datetime.now()
         current_time = now.strftime("%D %H:%M:%S")
