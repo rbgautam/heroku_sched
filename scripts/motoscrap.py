@@ -9,24 +9,24 @@ import os
 
 
 def read_html():
-    page = requests.get('https://ce.harpercollege.edu/public/category/programArea.do?method=load&selectedProgramAreaId=29362')
+    # page = requests.get('https://ce.harpercollege.edu/public/category/programArea.do?method=load&selectedProgramAreaId=29362')
+    page = requests.get('https://ce.harpercollege.edu/search/publicCourseAdvancedSearch.do?method=doPaginatedSearch&showInternal=false&cspIndex=true&isPageDisplayed=true&courseSearch.courseDescriptionKeyword=LMT&courseSearch.disciplineCode=&courseSearch.partialCourseNumber=&courseSearch.courseCategoryStringArray=0&courseSearch.sectionSemesterIdString=&courseSearch.sectionInstructorName=&courseSearch.sectionAccreditingAssociationStringArray=0&courseSearch.sectionDayOfWeekStringArray=0&courseSearch.sectionStartTimeStringArray=0&courseSearch.sectionStartMonthStringArray=0&courseSearch.filterString=availforreg')
     tree = html.fromstring(page.content)
     
     data_strong_html = tree.xpath('//*[@id="programAreaDescription"]/h3[1]/b/strong/text()')
     # print(data_strong_html[0])
-    data_text_html = tree.xpath('//*[@id="programAreaDescription"]/h3[1]/b/text()')
+    data_text_html = tree.xpath('//*[@id="variableContentBlockPG0035"]/div/text()')
     # print(data_text_html[0])
-    if data_strong_html[0] == '05/12/2021':
-        
+    assert_text = data_text_html[0]
+    if 'Your search did not produce any results' in assert_text:
         now = datetime.now()
         current_time = now.strftime("%D %H:%M:%S")
         print('text match at '+ current_time)
     else:
         send_sms()
         rt.stop()
-        quit()
         sys.exit("Course open")
-        
+        quit()
 
 
 def send_sms():
@@ -50,7 +50,7 @@ def send_sms():
 
 def request_validation_in_intervals():
     global rt
-    rt = RepeatedTimer(300, read_html) # it auto-starts, no need of rt.start()
+    rt = RepeatedTimer(5, read_html) # it auto-starts, no need of rt.start()
     
     try:
         sleep(10000) # your long-running job goes here...
