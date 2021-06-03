@@ -21,7 +21,27 @@ def read_html():
     if 'Your search did not produce any results' in assert_text:
         now = datetime.now()
         current_time = now.strftime("%D %H:%M:%S")
-        print('text match at '+ current_time)
+        print('Search Page: text match at '+ current_time)
+        read_html2()
+    else:
+        send_sms()
+        rt.stop()
+        sys.exit("Course open")
+        quit()
+
+def read_html2():
+    page = requests.get('https://ce.harpercollege.edu/public/category/programArea.do?method=load&selectedProgramAreaId=29362')
+    tree = html.fromstring(page.content)
+    
+    data_strong_html = tree.xpath('//*[@id="programAreaDescription"]/h3[1]/b/strong/text()')
+    # print(data_strong_html[0])
+    # data_text_html = tree.xpath('//*[@id="variableContentBlockPG0035"]/div/text()')
+    # # print(data_text_html[0])
+    assert_text = data_strong_html[0]
+    if assert_text == '06/01/2021':
+        now = datetime.now()
+        current_time = now.strftime("%D %H:%M:%S")
+        print('Main Page: text match at '+ current_time)
     else:
         send_sms()
         rt.stop()
