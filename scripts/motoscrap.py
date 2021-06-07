@@ -9,25 +9,32 @@ import os
 
 
 def read_html():
-    # page = requests.get('https://ce.harpercollege.edu/public/category/programArea.do?method=load&selectedProgramAreaId=29362')
-    page = requests.get('https://ce.harpercollege.edu/search/publicCourseAdvancedSearch.do?method=doPaginatedSearch&showInternal=false&cspIndex=true&isPageDisplayed=true&courseSearch.courseDescriptionKeyword=LMT&courseSearch.disciplineCode=&courseSearch.partialCourseNumber=&courseSearch.courseCategoryStringArray=0&courseSearch.sectionSemesterIdString=&courseSearch.sectionInstructorName=&courseSearch.sectionAccreditingAssociationStringArray=0&courseSearch.sectionDayOfWeekStringArray=0&courseSearch.sectionStartTimeStringArray=0&courseSearch.sectionStartMonthStringArray=0&courseSearch.filterString=availforreg')
-    tree = html.fromstring(page.content)
-    
-    data_strong_html = tree.xpath('//*[@id="programAreaDescription"]/h3[1]/b/strong/text()')
-    # print(data_strong_html[0])
-    data_text_html = tree.xpath('//*[@id="variableContentBlockPG0035"]/div/text()')
-    # print(data_text_html[0])
-    assert_text = data_text_html[0]
-    if 'Your search did not produce any results' in assert_text:
-        now = datetime.now()
-        current_time = now.strftime("%D %H:%M:%S")
-        print('Search Page: text match at '+ current_time)
-        read_html2()
-    else:
+    try:
+        # page = requests.get('https://ce.harpercollege.edu/public/category/programArea.do?method=load&selectedProgramAreaId=29362')
+        page = requests.get('https://ce.harpercollege.edu/search/publicCourseAdvancedSearch.do?method=doPaginatedSearch&showInternal=false&cspIndex=true&isPageDisplayed=true&courseSearch.courseDescriptionKeyword=LMT&courseSearch.disciplineCode=&courseSearch.partialCourseNumber=&courseSearch.courseCategoryStringArray=0&courseSearch.sectionSemesterIdString=&courseSearch.sectionInstructorName=&courseSearch.sectionAccreditingAssociationStringArray=0&courseSearch.sectionDayOfWeekStringArray=0&courseSearch.sectionStartTimeStringArray=0&courseSearch.sectionStartMonthStringArray=0&courseSearch.filterString=availforreg')
+        tree = html.fromstring(page.content)
+        
+        data_strong_html = tree.xpath('//*[@id="programAreaDescription"]/h3[1]/b/strong/text()')
+        # print(data_strong_html[0])
+        data_text_html = tree.xpath('//*[@id="courseSearchResult"]/tbody/tr/td[1]/span[1]/a/text()')
+        # print(data_text_html[0])
+        assert_text = data_text_html[0]
+        assert_text2 = tree.xpath('//*[@id="courseSearchResult"]/tbody/tr/td[4]/span/text()')[0]
+        # print(assert_text2)
+        if 'Motorcycle' in assert_text and assert_text2 != 'Full':
+            send_sms()
+            rt.stop()
+            sys.exit("Course open")
+            quit()
+
+        else:
+            now = datetime.now()
+            current_time = now.strftime("%D %H:%M:%S")
+            print('Search Page: text match at '+ current_time)
+            read_html2()
+    except Exception as ex:
         send_sms()
-        rt.stop()
-        sys.exit("Course open")
-        quit()
+        print(ex)
 
 def read_html2():
     page = requests.get('https://ce.harpercollege.edu/public/category/programArea.do?method=load&selectedProgramAreaId=29362')
