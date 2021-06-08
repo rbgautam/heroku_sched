@@ -1,1 +1,1 @@
-worker: python scripts/motoscrap.py
+worker: python scripts/stockscrap.py
