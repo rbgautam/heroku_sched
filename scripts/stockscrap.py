@@ -9,7 +9,7 @@ import os
 import interval_timer
 
 base_url = 'https://finance.yahoo.com/quote/'
-symbols = {'BB':17.89,'NIO':47.82,'XPEV':58.90}
+symbols = json.loads(os.environ['STOCK_DICT'])
 
 def get_stock_data():
     for item in symbols.keys():
@@ -64,7 +64,7 @@ def send_sms(msg):
 
 def request_validation_in_intervals():
     global rt
-    rt = interval_timer.RepeatedTimer(600, get_stock_data) # it auto-starts, no need of rt.start()
+    rt = interval_timer.RepeatedTimer(5, get_stock_data) # it auto-starts, no need of rt.start()
     
     try:
         sleep(10000) # your long-running job goes here...
