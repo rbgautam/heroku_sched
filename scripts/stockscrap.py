@@ -7,6 +7,7 @@ from threading import Timer
 from datetime import datetime
 import os
 import interval_timer
+import json
 
 base_url = 'https://finance.yahoo.com/quote/'
 symbols = json.loads(os.environ['STOCK_DICT'])
