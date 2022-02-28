@@ -28,7 +28,7 @@ def read_html():
             course_location = course_location.strip()
         # print(course_name)
         if 'Motorcycle' in assert_text and assert_text2 != 'Full':
-            # send_sms()
+            send_sms()
             print('Course open',course_name,course_location)
             rt.stop()
             sys.exit("Course open")
