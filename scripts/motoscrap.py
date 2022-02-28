@@ -20,9 +20,16 @@ def read_html():
         # print(data_text_html[0])
         assert_text = data_text_html[0]
         assert_text2 = tree.xpath('//*[@id="courseSearchResult"]/tbody/tr/td[4]/span/text()')[0]
-        # print(assert_text2)
+        course_name = tree.xpath('//*[@class="courseName"]/a/text()')[0]
+        if course_name :
+            course_name = course_name.strip()
+        course_location = tree.xpath('//*[@id="courseSearchResult"]/tbody/tr/td[2]/span/text()')[0]
+        if course_location:
+            course_location = course_location.strip()
+        # print(course_name)
         if 'Motorcycle' in assert_text and assert_text2 != 'Full':
-            send_sms()
+            # send_sms()
+            print('Course open',course_name,course_location)
             rt.stop()
             sys.exit("Course open")
             quit()
