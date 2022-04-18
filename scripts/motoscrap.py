@@ -20,16 +20,9 @@ def read_html():
         # print(data_text_html[0])
         assert_text = data_text_html[0]
         assert_text2 = tree.xpath('//*[@id="courseSearchResult"]/tbody/tr/td[4]/span/text()')[0]
-        course_name = tree.xpath('//*[@class="courseName"]/a/text()')[0]
-        if course_name :
-            course_name = course_name.strip()
-        course_location = tree.xpath('//*[@id="courseSearchResult"]/tbody/tr/td[2]/span/text()')[0]
-        if course_location:
-            course_location = course_location.strip()
-        # print(course_name)
+        # print(assert_text2)
         if 'Motorcycle' in assert_text and assert_text2 != 'Full':
             send_sms()
-            print('Course open',course_name,course_location)
             rt.stop()
             sys.exit("Course open")
             quit()
@@ -70,11 +63,11 @@ def send_sms():
         client = Client(account_sid, auth_token)
 
         message = client.messages.create(
-         body='Course open again \n https://ce.harpercollege.edu/public/category/programArea.do?method=load&selectedProgramAreaId=29362',
+         body='Course open again \n https://ce.harpercollege.edu/search/publicCourseAdvancedSearch.do?method=doPaginatedSearch&showInternal=false&cspIndex=true&isPageDisplayed=true&courseSearch.courseDescriptionKeyword=LMT&courseSearch.disciplineCode=&courseSearch.partialCourseNumber=&courseSearch.courseCategoryStringArray=0&courseSearch.sectionSemesterIdString=&courseSearch.sectionInstructorName=&courseSearch.sectionAccreditingAssociationStringArray=0&courseSearch.sectionDayOfWeekStringArray=0&courseSearch.sectionStartTimeStringArray=0&courseSearch.sectionStartMonthStringArray=0&courseSearch.filterString=availforreg',
          from_=os.environ['TWILIO_FROM_NUMBER'],
          to=os.environ['TWILIO_TO_NUMBER1'])
         message = client.messages.create(
-         body='Course open again \n https://ce.harpercollege.edu/public/category/programArea.do?method=load&selectedProgramAreaId=29362',
+         body='Course open again \n https://ce.harpercollege.edu/search/publicCourseAdvancedSearch.do?method=doPaginatedSearch&showInternal=false&cspIndex=true&isPageDisplayed=true&courseSearch.courseDescriptionKeyword=LMT&courseSearch.disciplineCode=&courseSearch.partialCourseNumber=&courseSearch.courseCategoryStringArray=0&courseSearch.sectionSemesterIdString=&courseSearch.sectionInstructorName=&courseSearch.sectionAccreditingAssociationStringArray=0&courseSearch.sectionDayOfWeekStringArray=0&courseSearch.sectionStartTimeStringArray=0&courseSearch.sectionStartMonthStringArray=0&courseSearch.filterString=availforreg',
          from_=os.environ['TWILIO_FROM_NUMBER'],
          to=os.environ['TWILIO_TO_NUMBER2'])
         print(message.sid)
