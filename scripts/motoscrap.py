@@ -1,6 +1,6 @@
 from lxml import html
 import requests
-from twilio.rest import Client
+# from twilio.rest import Client
 from time import sleep
 import sys
 from threading import Timer
@@ -45,7 +45,7 @@ def read_html2():
     # data_text_html = tree.xpath('//*[@id="variableContentBlockPG0035"]/div/text()')
     # # print(data_text_html[0])
     assert_text = data_strong_html[0]
-    if assert_text == '06/01/2021':
+    if assert_text == '04/17/2022':
         now = datetime.now()
         current_time = now.strftime("%D %H:%M:%S")
         print('Main Page: text match at '+ current_time)
@@ -54,7 +54,18 @@ def read_html2():
         rt.stop()
         sys.exit("Course open")
         quit()
-
+def read_rom_html(page):
+    base_url = 'https://www.consoleroms.com/roms/gbc'
+    page = requests.get('https://www.consoleroms.com/roms/gbc/page/'+str(page))
+    tree = html.fromstring(page.content)
+    
+    data_strong_html = tree.xpath('//*[@class="imgCon"]/a/@href')
+    for i in range(0,15):
+        full_url = base_url + data_strong_html[i]+ '/download'
+        print(full_url)
+def get_page_data():
+    for i in range(1,32):
+         read_rom_html(i) 
 
 def send_sms():
     try:
@@ -115,4 +126,5 @@ class RepeatedTimer(object):
 # send_mail()
 # send_sms()
 # read_html()
+#get_page_data()
 request_validation_in_intervals()
